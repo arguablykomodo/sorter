@@ -1,13 +1,31 @@
-import { Component, For } from "solid-js";
+import { Component, createSignal, For, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 
 import { ItemData } from "../types.ts";
 import Importer from "./Importer.tsx";
 import ItemCard from "./ItemCard.tsx";
+import Comparer from "./Comparer.tsx";
+import classes from "./App.module.css";
 
 interface State {
   unsorted: ItemData[];
   sorted: ItemData[];
+}
+
+type Sorter = Generator<[ItemData, ItemData], ItemData[], boolean>;
+
+// TODO: better sorting algorithm
+function* bubbleSort(items: ItemData[]): Sorter {
+  for (let i = 0; i < items.length - 1; i++) {
+    for (let j = 0; j < items.length - 1 - i; j++) {
+      if (yield [items[j], items[j + 1]]) {
+        const tmp = items[j];
+        items[j] = items[j + 1];
+        items[j + 1] = tmp;
+      }
+    }
+  }
+  return items;
 }
 
 const App: Component = () => {
@@ -16,13 +34,27 @@ const App: Component = () => {
     sorted: [],
   });
 
-  function compare(a: ItemData, b: ItemData) {
-    return a.name.localeCompare(b.name);
+  let sorter: Sorter;
+  const [comparing, setComparing] = createSignal<boolean>(false);
+  const [a, setA] = createSignal<ItemData>();
+  const [b, setB] = createSignal<ItemData>();
+  function sort() {
+    sorter = bubbleSort([...state.unsorted, ...state.sorted]);
+    const [newA, newB] = sorter.next().value;
+    setA(newA);
+    setB(newB);
+    setComparing(true);
   }
 
-  function sort() {
-    const items = [...state.sorted, ...state.unsorted].sort(compare);
-    setState({ unsorted: [], sorted: items });
+  function onCompare(isGreater: boolean) {
+    const result = sorter.next(isGreater);
+    if (result.done) {
+      setComparing(false);
+      setState({ unsorted: [], sorted: result.value });
+    } else {
+      setA(result.value[0]);
+      setB(result.value[1]);
+    }
   }
 
   function onSubmit(item: ItemData) {
@@ -31,12 +63,21 @@ const App: Component = () => {
 
   return (
     <>
-      <Importer onSubmit={onSubmit} />
-      <h2>Unsorted</h2>
-      <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
-      <button onClick={sort}>Sort</button>
-      <h2>Sorted</h2>
-      <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
+      <div class={classes.app}>
+        <Importer onSubmit={onSubmit} />
+        <section class={classes.unsorted}>
+          <h2>Unsorted</h2>
+          <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
+        </section>
+        <section class={classes.sorted}>
+          <h2>Sorted</h2>
+          <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
+        </section>
+        <button onClick={sort} class={classes.sort}>Sort</button>
+      </div>
+      <Show when={comparing()} >
+        <Comparer a={a()!} b={b()!} onCompare={onCompare} />
+      </Show>
     </>
   );
 };
