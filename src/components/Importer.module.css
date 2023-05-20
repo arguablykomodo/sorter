@@ -1,0 +1,17 @@
+.importer {
+  display: grid;
+  gap: 0.5ch;
+  grid-template-columns: max-content 1fr;
+}
+
+.importer label {
+  text-align: right;
+}
+
+.importer textarea {
+  resize: vertical;
+}
+
+.submit {
+  grid-column: 1 / -1;
+}

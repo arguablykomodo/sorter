@@ -1,0 +1,22 @@
+.item {
+  border: 1px solid currentColor;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.item h3 {
+  margin-top: 0;
+}
+
+.item > *:last-child {
+  margin-bottom: 0;
+}
+
+.item img {
+  float: right;
+  max-width: 20ch;
+}
+
+.item iframe {
+  border: none;
+}
