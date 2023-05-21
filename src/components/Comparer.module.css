@@ -1,4 +1,9 @@
 .comparer {
+  background: var(--bg1);
+  border: 1px solid var(--bg2);
+  border-radius: 3px;
+  color: inherit;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -8,6 +13,10 @@
   top: 50vh;
   transform: translate(-50%, -50%);
   margin: 0;
+}
+
+.comparer::backdrop {
+  background: #000a;
 }
 
 .comparer main {
