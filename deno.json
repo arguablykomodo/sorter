@@ -1,4 +1,5 @@
 {
+  "nodeModulesDir": true,
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable", "dom.asynciterable"],
     "jsx": "react-jsx",
@@ -11,7 +12,7 @@
     "solid-js/": "npm:/solid-js@^1.7.5/"
   },
   "tasks": {
-    "vite": "deno run -A --node-modules-dir npm:vite@^4.3.5",
+    "vite": "deno run -A npm:vite@^4.3.5",
     "dev": "deno task vite",
     "build": "deno task vite build",
     "preview": "deno task vite preview"
