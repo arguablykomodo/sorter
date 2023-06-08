@@ -2,6 +2,7 @@ import { Component, createSignal, For, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 
 import { ItemData } from "../types.ts";
+import { mergeInsertionSort, Sorter } from "../mergeInsertionSort.ts";
 import Importer from "./Importer.tsx";
 import ItemCard from "./ItemCard.tsx";
 import Comparer from "./Comparer.tsx";
@@ -10,22 +11,6 @@ import classes from "./App.module.css";
 interface State {
   unsorted: ItemData[];
   sorted: ItemData[];
-}
-
-type Sorter = Generator<[ItemData, ItemData], ItemData[], boolean>;
-
-// TODO: better sorting algorithm
-function* bubbleSort(items: ItemData[]): Sorter {
-  for (let i = 0; i < items.length - 1; i++) {
-    for (let j = 0; j < items.length - 1 - i; j++) {
-      if (yield [items[j], items[j + 1]]) {
-        const tmp = items[j];
-        items[j] = items[j + 1];
-        items[j + 1] = tmp;
-      }
-    }
-  }
-  return items;
 }
 
 const App: Component = () => {
@@ -39,7 +24,7 @@ const App: Component = () => {
   const [a, setA] = createSignal<ItemData>();
   const [b, setB] = createSignal<ItemData>();
   function sort() {
-    sorter = bubbleSort([...state.unsorted, ...state.sorted]);
+    sorter = mergeInsertionSort([...state.unsorted, ...state.sorted]) as Sorter;
     const [newA, newB] = sorter.next().value;
     setA(newA);
     setB(newB);
@@ -75,7 +60,7 @@ const App: Component = () => {
         </section>
         <button onClick={sort} class={classes.sort}>Sort</button>
       </main>
-      <Show when={comparing()} >
+      <Show when={comparing()}>
         <Comparer a={a()!} b={b()!} onCompare={onCompare} />
       </Show>
     </>
