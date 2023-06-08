@@ -2,6 +2,7 @@ import { Component } from "solid-js";
 import { Show } from "solid-js";
 
 import { ItemData } from "../types.ts";
+// @deno-types="../css.d.ts"
 import classes from "./ItemCard.module.css";
 
 const ItemCard: Component<ItemData> = (props) => {

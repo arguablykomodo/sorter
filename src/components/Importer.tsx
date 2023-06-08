@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
 import { ItemData } from "../types.ts";
 
+// @deno-types="../css.d.ts"
 import classes from "./Importer.module.css";
 
 interface Props {

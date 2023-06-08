@@ -6,6 +6,7 @@ import { mergeInsertionSort, Sorter } from "../mergeInsertionSort.ts";
 import Importer from "./Importer.tsx";
 import ItemCard from "./ItemCard.tsx";
 import Comparer from "./Comparer.tsx";
+// @deno-types="../css.d.ts"
 import classes from "./App.module.css";
 
 interface State {
