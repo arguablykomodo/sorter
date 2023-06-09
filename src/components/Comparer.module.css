@@ -7,15 +7,6 @@
   grid-template-columns: 40ch 40ch;
   grid-template-rows: max-content max-content max-content;
   gap: 1rem;
-
-  left: 50vw;
-  top: 50vh;
-  transform: translate(-50%, -50%);
-  margin: 0;
-}
-
-.comparer::backdrop {
-  background: #000a;
 }
 
 .comparer > h2 {

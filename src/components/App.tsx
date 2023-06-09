@@ -75,6 +75,7 @@ const App: Component = () => {
                 <ItemCard
                   item={item}
                   onDelete={() => onUnsortedDelete(i())}
+                  onEdit={(item) => setState("unsorted", i(), item)}
                 />
               )}
             </For>
@@ -88,6 +89,7 @@ const App: Component = () => {
                 <ItemCard
                   item={item}
                   onDelete={() => onSortedDelete(i())}
+                  onEdit={(item) => setState("sorted", i(), item)}
                 />
               )}
             </For>

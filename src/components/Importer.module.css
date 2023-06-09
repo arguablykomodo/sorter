@@ -4,29 +4,13 @@
   grid-template-columns: max-content 1fr;
 }
 
-.importer :is(input, textarea, select) {
-  margin: 0;
-  padding: 1px 4px;
-  background: var(--bg0);
-  border: 1px solid var(--bg2);
-}
-
 .importer input[type=submit] {
   grid-column: 1 / -1;
   margin-top: calc(1rem - 0.5ch);
 }
 
-.importer label {
-  text-align: right;
-  padding-top: 2px;
-}
-
 .importer output {
   grid-column: 2 / -1;
-}
-
-.importer textarea {
-  resize: vertical;
 }
 
 .typeSelector {

@@ -1,0 +1,20 @@
+.edit {
+  display: grid;
+  gap: 0.5ch;
+  grid-template-columns: max-content 1fr;
+
+  background: var(--bg1);
+  border: 1px solid var(--bg2);
+  color: inherit;
+}
+
+.edit footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1ch;
+  margin-top: calc(1rem - 0.5ch);
+}
+
+.edit footer button {
+  flex: 1 1;
+}

@@ -23,6 +23,22 @@ input, textarea, button, select {
   color: inherit;
 }
 
+input, textarea, select {
+  margin: 0;
+  padding: 1px 4px;
+  background: var(--bg0);
+  border: 1px solid var(--bg2);
+}
+
+label {
+  text-align: right;
+  padding-top: 2px;
+}
+
+textarea {
+  resize: vertical;
+}
+
 input[type=submit], button {
   background: var(--bg2);
   border: 1px solid var(--bg3);
@@ -39,6 +55,17 @@ input[type=submit], button {
 
 :is(input[type=submit], button):disabled {
   color: var(--fg2);
+}
+
+dialog {
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+dialog::backdrop {
+  background: #000a;
 }
 
 * {
