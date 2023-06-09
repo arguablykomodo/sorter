@@ -21,12 +21,6 @@ const ItemCard: Component<ItemData> = (props) => {
           <iframe src={props.embed} />
         </div>
       </Show>
-      <Show when={props.description}>
-        <details>
-          <summary>Description</summary>
-          <p>{props.description}</p>
-        </details>
-      </Show>
       <Show when={props.notes}>
         <details>
           <summary>Notes</summary>

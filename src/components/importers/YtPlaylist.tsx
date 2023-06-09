@@ -28,7 +28,6 @@ const YtPlaylist: Component<Props> = (props) => {
       .then((t) => new DOMParser().parseFromString(t, "text/xml"));
     return [...response.querySelectorAll("entry")].map((e) => ({
       name: tag(e, "title").textContent!,
-      description: tag(e, "media:description").textContent!,
       link: tag(e, "link").getAttribute("href")!,
       image: tag(e, "media:thumbnail").getAttribute("url")!,
       embed: embedPrefix + tag(e, "yt:videoId").textContent!,
