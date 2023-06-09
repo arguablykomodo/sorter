@@ -1,5 +1,4 @@
-import { Component } from "solid-js";
-import { Show } from "solid-js";
+import { Component, Match, Show, Switch } from "solid-js";
 
 import { ItemData } from "../types.ts";
 // @deno-types="../css.d.ts"
@@ -8,19 +7,21 @@ import classes from "./ItemCard.module.css";
 const ItemCard: Component<ItemData> = (props) => {
   return (
     <article class={classes.item}>
-      <Show when={props.image}>
-        <img src={props.image} />
-      </Show>
       <h3>
         <Show when={props.link} fallback={props.name}>
           <a href={props.link}>{props.name}</a>
         </Show>
       </h3>
-      <Show when={props.embed}>
-        <div class={classes.iframeContainer}>
-          <iframe src={props.embed} />
-        </div>
-      </Show>
+      <Switch>
+        <Match when={props.embed}>
+          <div class={classes.iframeContainer}>
+            <iframe loading="lazy" src={props.embed} />
+          </div>
+        </Match>
+        <Match when={props.image}>
+          <img loading="lazy" src={props.image} />
+        </Match>
+      </Switch>
       <Show when={props.notes}>
         <details>
           <summary>Notes</summary>

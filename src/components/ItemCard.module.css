@@ -22,15 +22,14 @@
 }
 
 .item img {
-  float: right;
-  max-width: 20ch;
+  width: 100%;
 }
 
 .iframeContainer {
   position: relative;
   aspect-ratio: 16 / 9;
-  max-height: 30vh;
-  margin: 1rem auto;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .iframeContainer iframe {

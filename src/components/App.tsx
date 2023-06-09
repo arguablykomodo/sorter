@@ -56,11 +56,15 @@ const App: Component = () => {
         </section>
         <section class={classes.unsorted}>
           <h2>Unsorted</h2>
-          <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
+          <div>
+            <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
+          </div>
         </section>
         <section class={classes.sorted}>
           <h2>Sorted</h2>
-          <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
+          <div>
+            <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
+          </div>
         </section>
       </main>
       <Show when={comparing()}>

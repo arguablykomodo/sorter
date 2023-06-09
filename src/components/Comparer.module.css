@@ -4,7 +4,7 @@
   color: inherit;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 40ch 40ch;
   grid-template-rows: max-content max-content max-content;
   gap: 1rem;
 
