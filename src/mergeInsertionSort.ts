@@ -20,6 +20,8 @@ function* search(items: Item[], item: Item): Comparer<number> {
 
 export type Sorter = Comparer<ItemData[]>;
 export function* mergeInsertionSort(items: Item[]): Comparer<Item[]> {
+  if (items.length <= 1) return items;
+
   // Split into pairs
   let pairs: [Item, Item][] = Array
     .from({ length: Math.floor(items.length / 2) })
@@ -29,9 +31,7 @@ export function* mergeInsertionSort(items: Item[]): Comparer<Item[]> {
   for (const p of pairs) if (yield [data(p[0]), data(p[1])]) p.reverse();
 
   // Sort pairs
-  if (pairs.length > 1) {
-    pairs = (yield* mergeInsertionSort(pairs)) as [Item, Item][];
-  }
+  pairs = (yield* mergeInsertionSort(pairs)) as [Item, Item][];
 
   // Separate
   const sorted: Item[] = [...pairs.shift()!]; // First pair + big element of pairs
@@ -43,7 +43,7 @@ export function* mergeInsertionSort(items: Item[]): Comparer<Item[]> {
     sorted.push(b);
   }
   if (items.length % 2 === 1) {
-    indices.push(indices.at(-1)! + 1);
+    indices.push(sorted.length);
     unsorted.push(items.at(-1)!);
   }
 
@@ -53,7 +53,7 @@ export function* mergeInsertionSort(items: Item[]): Comparer<Item[]> {
   while (unsorted.length > 0) {
     for (let i = curr - 1; i >= 0; i--) {
       if (i >= unsorted.length) continue;
-      const pos = yield* search(sorted.slice(0, indices[i] + 1), unsorted[i]);
+      const pos = yield* search(sorted.slice(0, indices[i]), unsorted[i]);
       indices.forEach((index, j) => indices[j] += index > pos ? 1 : 0);
       sorted.splice(pos, 0, unsorted[i]);
       indices.splice(i, 1);

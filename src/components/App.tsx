@@ -26,10 +26,15 @@ const App: Component = () => {
   const [b, setB] = createSignal<ItemData>();
   function sort() {
     sorter = mergeInsertionSort([...state.unsorted, ...state.sorted]) as Sorter;
-    const [newA, newB] = sorter.next().value;
-    setA(newA);
-    setB(newB);
-    setComparing(true);
+    const result = sorter.next();
+    if (result.done) {
+      setState({ unsorted: [], sorted: result.value });
+    } else {
+      const [newA, newB] = result.value;
+      setA(newA);
+      setB(newB);
+      setComparing(true);
+    }
   }
 
   function onCompare(isGreater: boolean) {
