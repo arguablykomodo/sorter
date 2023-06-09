@@ -1,13 +1,12 @@
 .comparer {
-  background: var(--bg1);
-  border: 1px solid var(--bg2);
-  border-radius: 3px;
+  background: var(--bg0);
+  border: 1px solid var(--bg1);
   color: inherit;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content max-content max-content;
   gap: 1rem;
-  justify-content: center;
 
   left: 50vw;
   top: 50vh;
@@ -19,21 +18,8 @@
   background: #000a;
 }
 
-.comparer main {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.comparer main > article {
-  flex: 1 1;
-}
-
-.comparer footer {
-  display: flex;
-  gap: 1rem;
-}
-
-.comparer footer button {
-  flex: 1 1;
+.comparer > h2 {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0;
 }

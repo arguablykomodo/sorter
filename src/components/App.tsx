@@ -50,7 +50,10 @@ const App: Component = () => {
   return (
     <>
       <main class={classes.app}>
-        <Importer onSubmit={onSubmit} />
+        <section class={classes.controls}>
+          <Importer onSubmit={onSubmit} />
+          <button onClick={sort} class={classes.sort}>Sort</button>
+        </section>
         <section class={classes.unsorted}>
           <h2>Unsorted</h2>
           <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
@@ -59,7 +62,6 @@ const App: Component = () => {
           <h2>Sorted</h2>
           <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
         </section>
-        <button onClick={sort} class={classes.sort}>Sort</button>
       </main>
       <Show when={comparing()}>
         <Comparer a={a()!} b={b()!} onCompare={onCompare} />

@@ -1,8 +1,7 @@
 .item {
-  background: var(--bg2);
-  border: 1px solid var(--bg3);
+  background: var(--bg1);
+  border: 1px solid var(--bg2);
   padding: 1rem;
-  border-radius: 3px;
 }
 
 .item h3 {
