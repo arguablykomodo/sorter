@@ -4,8 +4,36 @@
   padding: 1rem;
 }
 
+.item header {
+  display: flex;
+}
+
+.item header button {
+  background: none;
+  border: none;
+  padding: 2px;
+  margin: 0;
+  color: var(--fg3);
+  opacity: 0.5;
+}
+
+.item header button:hover:not(:disabled) {
+  background: none;
+  color: var(--fg2);
+  opacity: 0.75;
+  transform: scale(1.1);
+}
+
+.item header button:active:not(:disabled) {
+  background: none;
+  color: var(--fg1);
+  opacity: 1;
+  transform: scale(0.9);
+}
+
 .item h3 {
-  margin-top: 0;
+  margin: 0;
+  flex: 1 1;
 }
 
 .item h3 a {

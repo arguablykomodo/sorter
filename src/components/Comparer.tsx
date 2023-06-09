@@ -20,8 +20,8 @@ const Comparer: Component<Props> = (props) => {
   return (
     <dialog ref={dialog} class={classes.comparer}>
       <h2>Which is greater?</h2>
-      <ItemCard {...props.a} />
-      <ItemCard {...props.b} />
+      <ItemCard item={props.a} />
+      <ItemCard item={props.b} />
       <button onClick={[props.onCompare, true]}>A</button>
       <button onClick={[props.onCompare, false]}>B</button>
     </dialog>

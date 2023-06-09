@@ -49,7 +49,15 @@ const App: Component = () => {
   }
 
   function onSubmit(newItems: ItemData[]) {
-    setState("unsorted", (items: ItemData[]) => [...items, ...newItems]);
+    setState("unsorted", (items) => [...items, ...newItems]);
+  }
+
+  function onUnsortedDelete(i: number) {
+    setState("unsorted", (items) => items.filter((_, j) => i !== j));
+  }
+
+  function onSortedDelete(i: number) {
+    setState("sorted", (items) => items.filter((_, j) => i !== j));
   }
 
   return (
@@ -62,13 +70,27 @@ const App: Component = () => {
         <section class={classes.unsorted}>
           <h2>Unsorted</h2>
           <div>
-            <For each={state.unsorted}>{(item) => <ItemCard {...item} />}</For>
+            <For each={state.unsorted}>
+              {(item, i) => (
+                <ItemCard
+                  item={item}
+                  onDelete={() => onUnsortedDelete(i())}
+                />
+              )}
+            </For>
           </div>
         </section>
         <section class={classes.sorted}>
           <h2>Sorted</h2>
           <div>
-            <For each={state.sorted}>{(item) => <ItemCard {...item} />}</For>
+            <For each={state.sorted}>
+              {(item, i) => (
+                <ItemCard
+                  item={item}
+                  onDelete={() => onSortedDelete(i())}
+                />
+              )}
+            </For>
           </div>
         </section>
       </main>

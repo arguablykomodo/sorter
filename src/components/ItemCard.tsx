@@ -4,28 +4,38 @@ import { ItemData } from "../types.ts";
 // @deno-types="../css.d.ts"
 import classes from "./ItemCard.module.css";
 
-const ItemCard: Component<ItemData> = (props) => {
+interface Props {
+  item: ItemData;
+  onDelete?: () => void;
+}
+
+const ItemCard: Component<Props> = (props) => {
   return (
     <article class={classes.item}>
-      <h3>
-        <Show when={props.link} fallback={props.name}>
-          <a href={props.link}>{props.name}</a>
+      <header>
+        <h3>
+          <Show when={props.item.link} fallback={props.item.name}>
+            <a href={props.item.link}>{props.item.name}</a>
+          </Show>
+        </h3>
+        <Show when={props.onDelete}>
+          <button onClick={props.onDelete}>{"\u{1F5D1}\uFE0F"}</button>
         </Show>
-      </h3>
+      </header>
       <Switch>
-        <Match when={props.embed}>
+        <Match when={props.item.embed}>
           <div class={classes.iframeContainer}>
-            <iframe loading="lazy" src={props.embed} />
+            <iframe loading="lazy" src={props.item.embed} />
           </div>
         </Match>
-        <Match when={props.image}>
-          <img loading="lazy" src={props.image} />
+        <Match when={props.item.image}>
+          <img loading="lazy" src={props.item.image} />
         </Match>
       </Switch>
-      <Show when={props.notes}>
+      <Show when={props.item.notes}>
         <details>
           <summary>Notes</summary>
-          <p>{props.notes}</p>
+          <p>{props.item.notes}</p>
         </details>
       </Show>
     </article>
