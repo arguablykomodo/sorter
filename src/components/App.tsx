@@ -43,8 +43,8 @@ const App: Component = () => {
     }
   }
 
-  function onSubmit(item: ItemData) {
-    setState("unsorted", (items: ItemData[]) => [...items, item]);
+  function onSubmit(newItems: ItemData[]) {
+    setState("unsorted", (items: ItemData[]) => [...items, ...newItems]);
   }
 
   return (

@@ -8,19 +8,16 @@
     "unsorted sorted"
     "sort     sort";
   gap: 1rem;
-  padding: 1rem;
-}
-
-.app > form {
-  grid-area: importer;
 }
 
 .unsorted {
   grid-area: unsorted;
+  padding-left: 1rem;
 }
 
 .sorted {
   grid-area: sorted;
+  padding-right: 1rem;
 }
 
 .unsorted, .sorted {
@@ -37,4 +34,5 @@
 
 .sort {
   grid-area: sort;
+  margin: 0 1rem 1rem;
 }

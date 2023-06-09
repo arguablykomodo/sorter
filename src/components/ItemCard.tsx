@@ -17,15 +17,21 @@ const ItemCard: Component<ItemData> = (props) => {
         </Show>
       </h3>
       <Show when={props.embed}>
-        <iframe src={props.embed} />
+        <div class={classes.iframeContainer}>
+          <iframe src={props.embed} />
+        </div>
       </Show>
       <Show when={props.description}>
-        <p>{props.description}</p>
+        <details>
+          <summary>Description</summary>
+          <p>{props.description}</p>
+        </details>
       </Show>
       <Show when={props.notes}>
-        <p>
-          <small>{props.notes}</small>
-        </p>
+        <details>
+          <summary>Notes</summary>
+          <p>{props.notes}</p>
+        </details>
       </Show>
     </article>
   );

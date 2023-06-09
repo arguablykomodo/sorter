@@ -17,16 +17,10 @@ body {
   box-sizing: border-box;
 }
 
-input, textarea, button {
+input, textarea, select, button {
   color: currentColor;
-  font-family: inherit;
-  font-size: inherit;
+  font: inherit;
   border-radius: 3px;
-}
-
-input, textarea {
-  background: var(--bg2);
-  border: 1px solid var(--bg3);
 }
 
 input[type=submit], button {
@@ -34,12 +28,16 @@ input[type=submit], button {
   border: 1px solid var(--bg4);
 }
 
-:is(input[type=submit], button):hover {
+:is(input[type=submit], button):hover:not(:disabled) {
   background: var(--bg4);
   border: 1px solid var(--bg4);
 }
 
-:is(input[type=submit], button):active {
+:is(input[type=submit], button):active:not(:disabled) {
   background: var(--bg2);
   border: 1px solid var(--bg3);
+}
+
+:disabled {
+  opacity: 0.5;
 }
