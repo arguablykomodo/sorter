@@ -6,13 +6,13 @@
     "jsxImportSource": "solid-js"
   },
   "imports": {
-    "vite": "npm:vite@^4.3.5",
+    "vite": "npm:vite@^4.4.0",
     "vite-plugin-solid": "npm:vite-plugin-solid@^2.7.0",
-    "solid-js": "npm:solid-js@^1.7.5",
-    "solid-js/": "npm:/solid-js@^1.7.5/"
+    "solid-js": "npm:solid-js@^1.7.8",
+    "solid-js/": "npm:/solid-js@^1.7.8/"
   },
   "tasks": {
-    "vite": "deno run -A npm:vite@^4.3.5",
+    "vite": "deno run -A npm:vite@^4.4.0",
     "dev": "deno task vite",
     "build": "deno task vite build",
     "preview": "deno task vite preview"
