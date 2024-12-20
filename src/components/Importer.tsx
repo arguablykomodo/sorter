@@ -2,7 +2,6 @@ import { Component, createSignal } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { ItemData } from "../types.ts";
 
-// @deno-types="../css.d.ts"
 import classes from "./Importer.module.css";
 
 import ManualInput from "./importers/ManualInput.tsx";

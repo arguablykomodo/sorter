@@ -1,7 +1,6 @@
 import { Component, onCleanup, onMount } from "solid-js";
 import { ItemData } from "../types.ts";
 
-// @deno-types="../css.d.ts"
 import classes from "./EditItem.module.css";
 
 interface Props {

@@ -3,7 +3,6 @@ import { Portal } from "solid-js/web";
 
 import { ItemData } from "../types.ts";
 import EditItem from "./EditItem.tsx";
-// @deno-types="../css.d.ts"
 import classes from "./ItemCard.module.css";
 
 interface Props {
