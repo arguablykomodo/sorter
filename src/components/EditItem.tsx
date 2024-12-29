@@ -13,8 +13,6 @@ const EditItem: Component<Props> = (props) => {
   let name: HTMLInputElement | undefined;
   let link: HTMLInputElement | undefined;
   let image: HTMLInputElement | undefined;
-  let embed: HTMLInputElement | undefined;
-  let notes: HTMLTextAreaElement | undefined;
   let dialog: HTMLDialogElement | undefined;
 
   onMount(() => dialog!.showModal());
@@ -25,8 +23,6 @@ const EditItem: Component<Props> = (props) => {
       name: name!.value,
       link: link!.value || undefined,
       image: image!.value || undefined,
-      embed: embed!.value || undefined,
-      notes: notes!.value || undefined,
     });
   }
 
@@ -38,10 +34,6 @@ const EditItem: Component<Props> = (props) => {
       <input type="text" ref={link} value={props.item.link ?? ""} />
       <label>Image:</label>
       <input type="text" ref={image} value={props.item.image ?? ""} />
-      <label>Embed:</label>
-      <input type="text" ref={embed} value={props.item.embed ?? ""} />
-      <label>Notes:</label>
-      <textarea ref={notes} value={props.item.notes ?? ""} />
       <footer>
         <button onClick={props.onCancel}>Cancel</button>
         <button onClick={onApply}>Apply</button>

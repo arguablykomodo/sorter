@@ -1,5 +1,5 @@
 import { Component, createResource, createSignal } from "solid-js";
-import { Match, Show, Switch } from "solid-js/web";
+import { Match, Switch } from "solid-js/web";
 import { ItemData } from "../../types.ts";
 
 interface Props {
@@ -7,7 +7,6 @@ interface Props {
 }
 
 const feedPrefix = "https://www.youtube.com/feeds/videos.xml?playlist_id=";
-const embedPrefix = "https://www.youtube.com/embed/";
 
 function tag(element: Element, name: string): Element {
   return element.getElementsByTagName(name)[0];
@@ -30,7 +29,6 @@ const YtPlaylist: Component<Props> = (props) => {
       name: tag(e, "title").textContent!,
       link: tag(e, "link").getAttribute("href")!,
       image: tag(e, "media:thumbnail").getAttribute("url")!,
-      embed: embedPrefix + tag(e, "yt:videoId").textContent!,
     }));
   }
 

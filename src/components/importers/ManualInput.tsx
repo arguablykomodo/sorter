@@ -9,8 +9,6 @@ const ManualInput: Component<Props> = (props) => {
   let name: HTMLInputElement | undefined;
   let link: HTMLInputElement | undefined;
   let image: HTMLInputElement | undefined;
-  let embed: HTMLInputElement | undefined;
-  let notes: HTMLTextAreaElement | undefined;
 
   function onSubmit(e: SubmitEvent) {
     e.preventDefault();
@@ -18,14 +16,10 @@ const ManualInput: Component<Props> = (props) => {
       name: name!.value,
       link: link!.value || undefined,
       image: image!.value || undefined,
-      embed: embed!.value || undefined,
-      notes: notes!.value || undefined,
     }]);
     name!.value = "";
     link!.value = "";
     image!.value = "";
-    embed!.value = "";
-    notes!.value = "";
   }
 
   return (
@@ -36,10 +30,6 @@ const ManualInput: Component<Props> = (props) => {
       <input type="text" ref={link} />
       <label>Image:</label>
       <input type="text" ref={image} />
-      <label>Embed:</label>
-      <input type="text" ref={embed} />
-      <label>Notes:</label>
-      <textarea ref={notes} />
       <input type="submit" value="Add" />
     </form>
   );

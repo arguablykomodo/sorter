@@ -1,4 +1,4 @@
-import { Component, createSignal, Match, Show, Switch } from "solid-js";
+import { Component, createSignal, Show } from "solid-js";
 import { Portal } from "solid-js/web";
 
 import { ItemData } from "../types.ts";
@@ -47,21 +47,8 @@ const ItemCard: Component<Props> = (props) => {
           <button onClick={props.onDelete}>{"\u{1F5D1}\uFE0F"}</button>
         </Show>
       </header>
-      <Switch>
-        <Match when={props.item.embed}>
-          <div class={classes.iframeContainer}>
-            <iframe loading="lazy" src={props.item.embed} />
-          </div>
-        </Match>
-        <Match when={props.item.image}>
-          <img loading="lazy" src={props.item.image} />
-        </Match>
-      </Switch>
-      <Show when={props.item.notes}>
-        <details>
-          <summary>Notes</summary>
-          <p>{props.item.notes}</p>
-        </details>
+      <Show when={props.item.image}>
+        <img loading="lazy" src={props.item.image} />
       </Show>
     </article>
   );
