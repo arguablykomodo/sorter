@@ -5,6 +5,8 @@
 
   type ItemProps = ComponentProps<typeof Item>;
 
+  let steamProfileUrl: string | undefined = $state();
+
   let unsorted: ItemProps[] = $state([]);
   let sorted: ItemProps[] = $state([]);
   let newItem: ItemProps = $state({ name: "" });
@@ -32,6 +34,34 @@
 </script>
 
 <h1>Sorter</h1>
+<form
+  onsubmit={async (e) => {
+    const input = e.target as HTMLInputElement;
+    e.preventDefault();
+    input.setCustomValidity("");
+    const url = `/import/steam?profileUrl=${steamProfileUrl}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    if (response.ok) {
+      unsorted.push(...json);
+    } else if (response.status >= 400 && response.status < 500) {
+      input.setCustomValidity(json.message);
+    } else {
+      console.error(json.message);
+      alert(json.message);
+    }
+  }}
+>
+  <input
+    type="url"
+    name="url"
+    bind:value={steamProfileUrl}
+    placeholder="https://steamcommunity.com/id/gabelogannewell"
+    pattern="https?://steamcommunity\.com/id/\w+/?"
+    required
+  />
+  <input type="submit" value="Import" />
+</form>
 <form
   onsubmit={(e) => {
     e.preventDefault();
