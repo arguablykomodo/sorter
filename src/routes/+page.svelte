@@ -1,15 +1,14 @@
 <script lang="ts">
   import type { ComponentProps } from "svelte";
   import Item from "$lib/Item.svelte";
+  import SteamImport from "$lib/SteamImport.svelte";
+  import ManualImport from "$lib/ManualImport.svelte";
   import { mergeInsertionSort, type Sorter } from "$lib/mergeInsertionSort";
 
   type ItemProps = ComponentProps<typeof Item>;
 
-  let steamProfileUrl: string | undefined = $state();
-
   let unsorted: ItemProps[] = $state([]);
   let sorted: ItemProps[] = $state([]);
-  let newItem: ItemProps = $state({ name: "" });
 
   let sorter: Sorter<ItemProps, ItemProps>;
   let comparison: [ItemProps, ItemProps] | undefined = $state(undefined);
@@ -34,56 +33,8 @@
 </script>
 
 <h1>Sorter</h1>
-<form
-  onsubmit={async (e) => {
-    const input = e.target as HTMLInputElement;
-    e.preventDefault();
-    input.setCustomValidity("");
-    const url = `/import/steam?profileUrl=${steamProfileUrl}`;
-    const response = await fetch(url);
-    const json = await response.json();
-    if (response.ok) {
-      unsorted.push(...json);
-    } else if (response.status >= 400 && response.status < 500) {
-      input.setCustomValidity(json.message);
-    } else {
-      console.error(json.message);
-      alert(json.message);
-    }
-  }}
->
-  <input
-    type="url"
-    name="url"
-    bind:value={steamProfileUrl}
-    placeholder="https://steamcommunity.com/id/gabelogannewell"
-    pattern="https?://steamcommunity\.com/id/\w+/?"
-    required
-  />
-  <input type="submit" value="Import" />
-</form>
-<form
-  onsubmit={(e) => {
-    e.preventDefault();
-    unsorted.push(newItem);
-    newItem = { name: "" };
-  }}
->
-  <input type="text" name="name" bind:value={newItem.name} placeholder="Name" />
-  <input
-    type="url"
-    name="link"
-    bind:value={newItem.link}
-    placeholder="Link (optional)"
-  />
-  <input
-    type="url"
-    name="image"
-    bind:value={newItem.image}
-    placeholder="Image URL (optional)"
-  />
-  <input type="submit" value="Add" />
-</form>
+<SteamImport onImport={(items) => unsorted.push(...items)}></SteamImport>
+<ManualImport onImport={(items) => unsorted.push(...items)}></ManualImport>
 <button onclick={startSort}>Sort</button>
 {#if comparison !== undefined}
   <h3>Which is better?</h3>
