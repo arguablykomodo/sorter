@@ -7,35 +7,55 @@
 
   type ItemProps = ComponentProps<typeof Item>;
 
-  let unsorted: ItemProps[] = $state([]);
-  let sorted: ItemProps[] = $state([]);
+  let items: ItemProps[] = $state([]);
+  let comparison: [ItemProps, ItemProps] | undefined = $state(undefined);
+  let sorted = $state(false);
 
   let sorter: Sorter<ItemProps, ItemProps>;
-  let comparison: [ItemProps, ItemProps] | undefined = $state(undefined);
 
   function startSort() {
-    sorter = mergeInsertionSort(unsorted, (item) => item);
+    sorter = mergeInsertionSort(items, (item) => item);
     const result = sorter.next();
     if (result.done) {
-      unsorted = [];
-      sorted = result.value;
+      items = result.value;
+      sorted = true;
     } else comparison = result.value;
   }
 
   function iterate(greater: boolean) {
     const result = sorter!.next(greater);
     if (result.done) {
-      unsorted = [];
-      sorted = result.value;
+      items = result.value;
       comparison = undefined;
+      sorted = true;
     } else comparison = result.value;
+  }
+
+  function importItems(newItems: ItemProps[]) {
+    items.push(...newItems);
+    sorted = false;
   }
 </script>
 
 <h1>Sorter</h1>
-<SteamImport onImport={(items) => unsorted.push(...items)}></SteamImport>
-<ManualImport onImport={(items) => unsorted.push(...items)}></ManualImport>
+<SteamImport onImport={importItems}></SteamImport>
+<ManualImport onImport={importItems}></ManualImport>
 <button onclick={startSort}>Sort</button>
+{#if sorted}
+  <h2>Items</h2>
+  <ol>
+    {#each items as item}
+      <li><Item {...item}></Item></li>
+    {/each}
+  </ol>
+{:else}
+  <h2>Results</h2>
+  <ul>
+    {#each items as item}
+      <li><Item {...item}></Item></li>
+    {/each}
+  </ul>
+{/if}
 {#if comparison !== undefined}
   <h3>Which is better?</h3>
   <ul>
@@ -49,15 +69,3 @@
     </li>
   </ul>
 {/if}
-<h2>Unsorted</h2>
-<ul>
-  {#each unsorted as item}
-    <li><Item {...item}></Item></li>
-  {/each}
-</ul>
-<h2>Sorted</h2>
-<ol>
-  {#each sorted as item}
-    <li><Item {...item}></Item></li>
-  {/each}
-</ol>
