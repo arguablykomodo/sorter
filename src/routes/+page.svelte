@@ -54,14 +54,14 @@
 <ManualImport onImport={importItems}></ManualImport>
 <button onclick={startSort}>Sort</button>
 {#if sorted}
-  <h2>Items</h2>
+  <h2>Results</h2>
   <ol>
     {#each items as item (item.name)}
       <li><Item {...item}></Item></li>
     {/each}
   </ol>
 {:else}
-  <h2>Results</h2>
+  <h2>Items</h2>
   <ul>
     {#each items as item, i (item.name)}
       <li>

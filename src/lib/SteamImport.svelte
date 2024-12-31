@@ -9,23 +9,22 @@
   } = $props();
 
   let steamProfileUrl: string | undefined = $state();
-</script>
+  let promise = $state();
 
-<form
-  onsubmit={async (e) => {
-    e.preventDefault();
+  async function fetchData() {
     const url = `/import/steam?profileUrl=${steamProfileUrl}`;
     const response = await fetch(url);
     const json = await response.json();
     if (response.ok) {
       onImport(json);
-    } else if (response.status >= 400 && response.status < 500) {
-      console.error(json.message);
-      alert(json.message);
-    } else {
-      console.error(json.message);
-      alert(json.message);
-    }
+    } else throw new Error(json.message);
+  }
+</script>
+
+<form
+  onsubmit={(e) => {
+    e.preventDefault();
+    promise = fetchData();
   }}
 >
   <input
@@ -33,8 +32,12 @@
     name="url"
     bind:value={steamProfileUrl}
     placeholder="Steam profile URL"
-    pattern="https?://steamcommunity\.com/id/\w+/?"
     required
   />
   <input type="submit" value="Import" />
+  {#await promise}
+    <span>Loading...</span>
+  {:catch error}
+    <span>{error}</span>
+  {/await}
 </form>
