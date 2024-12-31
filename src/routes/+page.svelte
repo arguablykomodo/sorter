@@ -9,11 +9,18 @@
 
   let items: ItemProps[] = $state([]);
   let comparison: [ItemProps, ItemProps] | undefined = $state(undefined);
+  let iteration = $state(0);
+  let comparisons = $state(0);
   let sorted = $state(false);
 
   let sorter: Sorter<ItemProps, ItemProps>;
 
   function startSort() {
+    iteration = 0;
+    comparisons = 0;
+    for (let k = 1; k <= items.length; k++) {
+      comparisons += Math.ceil(Math.log2(0.75 * k));
+    }
     sorter = mergeInsertionSort(items, (item) => item);
     const result = sorter.next();
     if (result.done) {
@@ -23,6 +30,7 @@
   }
 
   function iterate(greater: boolean) {
+    iteration++;
     const result = sorter!.next(greater);
     if (result.done) {
       items = result.value;
@@ -74,4 +82,5 @@
       <Item {...comparison[1]}></Item>
     </li>
   </ul>
+  <progress max={comparisons} value={iteration}></progress>
 {/if}
