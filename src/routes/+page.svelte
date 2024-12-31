@@ -35,6 +35,10 @@
     items.push(...newItems);
     sorted = false;
   }
+
+  function removeItem(index: number) {
+    items.splice(index, 1);
+  }
 </script>
 
 <h1>Sorter</h1>
@@ -44,15 +48,17 @@
 {#if sorted}
   <h2>Items</h2>
   <ol>
-    {#each items as item}
+    {#each items as item (item.name)}
       <li><Item {...item}></Item></li>
     {/each}
   </ol>
 {:else}
   <h2>Results</h2>
   <ul>
-    {#each items as item}
-      <li><Item {...item}></Item></li>
+    {#each items as item, i (item.name)}
+      <li>
+        <Item {...item}></Item><button onclick={() => removeItem(i)}>🗑</button>
+      </li>
     {/each}
   </ul>
 {/if}
