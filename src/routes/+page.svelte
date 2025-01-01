@@ -2,6 +2,7 @@
   import type { ComponentProps } from "svelte";
   import Item from "$lib/Item.svelte";
   import SteamImport from "$lib/SteamImport.svelte";
+  import YoutubeImport from "$lib/YoutubeImport.svelte";
   import ManualImport from "$lib/ManualImport.svelte";
   import { mergeInsertionSort, type Sorter } from "$lib/mergeInsertionSort";
 
@@ -52,6 +53,7 @@
 <h1>Sorter</h1>
 <SteamImport onImport={importItems}></SteamImport>
 <ManualImport onImport={importItems}></ManualImport>
+<YoutubeImport onImport={importItems}></YoutubeImport>
 <button onclick={startSort}>Sort</button>
 {#if sorted}
   <h2>Results</h2>
