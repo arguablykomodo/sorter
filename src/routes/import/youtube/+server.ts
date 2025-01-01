@@ -30,7 +30,7 @@ export const GET: RequestHandler = async (req) => {
   const playlistUrl = url.searchParams.get("url");
   if (!playlistUrl) error(400, "Missing URL");
 
-  const match = /^https:\/\/www\.youtube\.com\/playlist\?list=([\w\d]+)/
+  const match = /^https?:\/\/www\.youtube\.com\/playlist\?list=([\w\d]+)/
     .exec(playlistUrl);
   if (!match) error(400, "Wrong URL");
 
@@ -45,12 +45,13 @@ export const GET: RequestHandler = async (req) => {
         part: "snippet",
         playlistId: match[1],
         maxResults: 50,
+        pageToken: nextPageToken ?? "",
       },
     );
     nextPageToken = result.nextPageToken;
     totalResults = result.pageInfo.totalResults;
     const newItems = result.items
-      .filter((item) => item.snippet.thumbnails.high)
+      .filter((item) => item.snippet.thumbnails.high) // Filter removed videos
       .map((item) => ({
         name: item.snippet.title,
         link: "https://youtu.be/" + item.snippet.resourceId.videoId,
