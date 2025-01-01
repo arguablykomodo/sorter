@@ -1,18 +1,14 @@
 <script lang="ts">
-  import type { ComponentProps } from "svelte";
-  import Item from "$lib/Item.svelte";
+  import Throbber from "./Throbber.svelte";
+  import { type ItemData } from "$lib/Item.svelte";
 
-  const {
-    onImport,
-  }: {
-    onImport: (items: ComponentProps<typeof Item>[]) => void;
-  } = $props();
+  const { onImport }: { onImport: (items: ItemData[]) => void } = $props();
 
-  let steamProfileUrl: string | undefined = $state();
+  let wishlistUrl: string | undefined = $state();
   let promise = $state();
 
   async function fetchData() {
-    const url = `/import/steam?profileUrl=${steamProfileUrl}`;
+    const url = `/import/steam?url=${wishlistUrl}`;
     const response = await fetch(url);
     const json = await response.json();
     if (response.ok) {
@@ -27,17 +23,23 @@
     promise = fetchData();
   }}
 >
-  <input
-    type="url"
-    name="url"
-    bind:value={steamProfileUrl}
-    placeholder="Steam profile URL"
-    required
-  />
-  <input type="submit" value="Import" />
-  {#await promise}
-    <span>Loading...</span>
-  {:catch error}
-    <span>{error}</span>
-  {/await}
+  <fieldset>
+    <legend>Import Steam Wishlist</legend>
+    <label>
+      Steam wishlist URL
+      <input
+        type="url"
+        name="url"
+        bind:value={wishlistUrl}
+        placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
+        required
+      />
+    </label>
+    <input type="submit" value="Import" />
+    {#await promise}
+      <small><Throbber />Loading</small>
+    {:catch error}
+      <small style:color="var(--error-fg)">{error}</small>
+    {/await}
+  </fieldset>
 </form>

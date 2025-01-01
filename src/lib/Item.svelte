@@ -1,25 +1,57 @@
 <script lang="ts">
-  const {
-    name,
-    link,
-    image,
-  }: {
+  import type { Snippet } from "svelte";
+
+  export interface ItemData {
     name: string;
     link?: string;
     image?: string;
-  } = $props();
+  }
+
+  interface Props extends ItemData {
+    children?: Snippet;
+  }
+
+  const { name, link, image, children }: Props = $props();
 </script>
 
-{#if image}
-  <img
-    src={image}
-    alt={name}
-    style:max-height="3em"
-    style:vertical-align="middle"
-  />
-{/if}
-{#if link}
-  <a href={link}>{name}</a>
-{:else}
-  <span>{name}</span>
-{/if}
+<article>
+  {@render children?.()}
+  {#if image}
+    <img src={image} alt={name} />
+  {/if}
+  <div>
+    <span>{name}</span>
+    {#if link}
+      <a href={link}>{link}</a>
+    {/if}
+  </div>
+</article>
+
+<style>
+  article {
+    display: flex;
+    background: var(--secondary-bg);
+    padding: 1ch;
+    gap: 1ch;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  span {
+    text-wrap: balance;
+  }
+
+  img {
+    align-self: center;
+    max-height: 3em;
+    vertical-align: middle;
+  }
+
+  a {
+    font-size: small;
+  }
+</style>

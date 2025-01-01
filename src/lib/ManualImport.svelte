@@ -1,12 +1,9 @@
 <script lang="ts">
-  import type { ComponentProps } from "svelte";
-  import Item from "$lib/Item.svelte";
+  import {type ItemData} from "$lib/Item.svelte";
 
-  type ItemProps = ComponentProps<typeof Item>;
+  const { onImport }: { onImport: (items: ItemData[]) => void } = $props();
 
-  const { onImport }: { onImport: (items: ItemProps[]) => void } = $props();
-
-  let newItem: ItemProps = $state({ name: "" });
+  let newItem: ItemData = $state({ name: "" });
 </script>
 
 <form
@@ -16,24 +13,20 @@
     newItem = { name: "" };
   }}
 >
-  <input
-    type="text"
-    name="name"
-    bind:value={newItem.name}
-    placeholder="Name"
-    required
-  />
-  <input
-    type="url"
-    name="link"
-    bind:value={newItem.link}
-    placeholder="Link (optional)"
-  />
-  <input
-    type="url"
-    name="image"
-    bind:value={newItem.image}
-    placeholder="Image URL (optional)"
-  />
-  <input type="submit" value="Add" />
+  <fieldset>
+    <legend>Manual Input</legend>
+    <label>
+      Name
+      <input type="text" name="name" bind:value={newItem.name} required />
+    </label>
+    <label>
+      Link (optional)
+      <input type="url" name="link" bind:value={newItem.link} />
+    </label>
+    <label>
+      Image URL (optional)
+      <input type="url" name="image" bind:value={newItem.image} />
+    </label>
+    <input type="submit" value="Add" />
+  </fieldset>
 </form>

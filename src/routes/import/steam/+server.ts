@@ -45,10 +45,11 @@ type ItemsResponse = {
 export const GET: RequestHandler = async (req) => {
   const url = new URL(req.url);
 
-  const profileUrl = url.searchParams.get("profileUrl");
-  if (!profileUrl) error(400, "Missing Profile URL");
+  const wishlistUrl = url.searchParams.get("wishlist");
+  if (!wishlistUrl) error(400, "Missing wishlist URL");
 
-  const match = /^https?:\/\/steamcommunity\.com\/id\/(\w+)/.exec(profileUrl);
+  const match = /^https?:\/\/steamcommunity\.com\/wishlist\/id\/(\w+)/
+    .exec(wishlistUrl);
   if (!match) error(400, "Wrong URL");
 
   const vanity: VanityResponse = await steamFetch(

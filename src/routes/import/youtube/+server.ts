@@ -12,7 +12,7 @@ async function googleFetch(endpoint: string, params: Record<string, any>) {
   return fetch(`${baseUrl}/${endpoint}?${query}`).then((r) => r.json());
 }
 
-interface PlaylistResponse {
+type PlaylistResponse = {
   nextPageToken: string;
   pageInfo: { totalResults: number };
   items: {
@@ -22,7 +22,12 @@ interface PlaylistResponse {
       resourceId: { videoId: string };
     };
   }[];
-}
+} | {
+  error: {
+    code: number;
+    message: string;
+  };
+};
 
 export const GET: RequestHandler = async (req) => {
   const url = new URL(req.url);
@@ -48,6 +53,7 @@ export const GET: RequestHandler = async (req) => {
         pageToken: nextPageToken ?? "",
       },
     );
+    if ("error" in result) error(result.error.code, result.error.message);
     nextPageToken = result.nextPageToken;
     totalResults = result.pageInfo.totalResults;
     const newItems = result.items
