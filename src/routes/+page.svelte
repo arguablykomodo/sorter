@@ -4,6 +4,7 @@
   import YoutubeImport from "$lib/YoutubeImport.svelte";
   import ManualImport from "$lib/ManualImport.svelte";
   import { mergeInsertionSort, type Sorter } from "$lib/mergeInsertionSort";
+  import WikidataImport from "$lib/WikidataImport.svelte";
 
   let items: ItemData[] = $state([]);
   let comparison: [ItemData, ItemData] | undefined = $state();
@@ -56,9 +57,10 @@
 <main>
   <section class="controls">
     <button class="sortButton" onclick={startSort}>Sort</button>
-    <ManualImport onImport={importItems}></ManualImport>
-    <SteamImport onImport={importItems}></SteamImport>
-    <YoutubeImport onImport={importItems}></YoutubeImport>
+    <ManualImport onImport={importItems} />
+    <SteamImport onImport={importItems} />
+    <YoutubeImport onImport={importItems} />
+    <WikidataImport onImport={importItems} />
   </section>
   <section class="items">
     {#if sorted}
@@ -100,7 +102,7 @@
 <style>
   main {
     display: grid;
-    grid-template-columns: 30ch 1fr;
+    grid-template-columns: max-content 1fr;
     grid-template-rows: 100vh;
   }
 

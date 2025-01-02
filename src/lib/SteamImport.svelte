@@ -24,9 +24,9 @@
   }}
 >
   <fieldset>
-    <legend>Import Steam Wishlist</legend>
+    <legend>Steam Wishlist</legend>
     <label>
-      Steam wishlist URL
+      Wishlist URL
       <input
         type="url"
         name="url"

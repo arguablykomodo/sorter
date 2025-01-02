@@ -4,11 +4,12 @@
 
   const { onImport }: { onImport: (items: ItemData[]) => void } = $props();
 
-  let playlistUrl: string | undefined = $state();
+  let query: string | undefined = $state();
   let promise = $state();
 
   async function fetchData() {
-    const url = `/import/youtube?url=${playlistUrl}`;
+    const searchParams = new URLSearchParams({ query: query ?? "" });
+    const url = `/import/wikidata?${searchParams}`;
     const response = await fetch(url);
     const json = await response.json();
     if (response.ok) {
@@ -24,16 +25,23 @@
   }}
 >
   <fieldset>
-    <legend>Youtube Playlist</legend>
+    <legend>Wikidata (advanced)</legend>
     <label>
-      Playlist URL
-      <input
-        type="url"
-        name="url"
-        bind:value={playlistUrl}
-        placeholder="https://www.youtube.com/playlist?list=PLlaN88a7y2_plecYoJxvRFTLHVbIVAOoc"
+      SPARQL Query
+      <textarea
+        bind:value={query}
+        placeholder="# Country Flags
+SELECT ?name ?link ?image
+WHERE &lbrace;
+  ?item wdt:P31 wd:Q3624078 .
+  ?item wdt:P41 ?image .
+  ?item rdfs:label ?name filter (lang(?name) = &quot;en&quot;)
+  ?link schema:about ?item .
+  ?link schema:inLanguage &quot;en&quot; .
+  ?link schema:isPartOf <https://en.wikipedia.org/> .
+&rbrace;"
         required
-      />
+      ></textarea>
     </label>
     <input type="submit" value="Import" />
     {#await promise}

@@ -33,9 +33,14 @@ select {
   font: inherit;
 }
 
-input {
+input,
+textarea {
   background: var(--primary-bg);
   border: 1px solid var(--tertiary-bg);
+}
+
+textarea {
+  font-family: "Cascadia Code", "Cascadia Mono", "Fira Code", "Fira Mono", "Noto Mono", monospace;
 }
 
 button,
@@ -49,7 +54,7 @@ input[type=submit] {
   }
 
   &:active {
-    background: color-mix(in oklab, var(--accent-bg), transparent 90%);;
+    background: color-mix(in oklab, var(--accent-bg), transparent 90%);
   }
 }
 
