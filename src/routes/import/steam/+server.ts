@@ -45,7 +45,7 @@ type ItemsResponse = {
 export const GET: RequestHandler = async (req) => {
   const url = new URL(req.url);
 
-  const wishlistUrl = url.searchParams.get("wishlist");
+  const wishlistUrl = url.searchParams.get("url");
   if (!wishlistUrl) error(400, "Missing wishlist URL");
 
   const match = /^https?:\/\/steamcommunity\.com\/wishlist\/id\/(\w+)/

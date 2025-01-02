@@ -8,7 +8,8 @@
   let promise = $state();
 
   async function fetchData() {
-    const url = `/import/steam?url=${wishlistUrl}`;
+    const searchParams = new URLSearchParams({ url: wishlistUrl ?? "" });
+    const url = `/import/steam?${searchParams}`;
     const response = await fetch(url);
     const json = await response.json();
     if (response.ok) {

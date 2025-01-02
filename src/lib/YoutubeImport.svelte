@@ -8,7 +8,8 @@
   let promise = $state();
 
   async function fetchData() {
-    const url = `/import/youtube?url=${playlistUrl}`;
+    const searchParams = new URLSearchParams({ url: playlistUrl ?? "" });
+    const url = `/import/youtube?${searchParams}`;
     const response = await fetch(url);
     const json = await response.json();
     if (response.ok) {
