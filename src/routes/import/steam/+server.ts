@@ -48,7 +48,9 @@ export const GET: RequestHandler = async (req) => {
   const wishlistUrl = url.searchParams.get("url");
   if (!wishlistUrl) error(400, "Missing wishlist URL");
 
-  const match = /^https?:\/\/steamcommunity\.com\/wishlist\/id\/(\w+)/
+  const match = new RegExp(
+    "^https?://(?:steamcommunity|store\\.steampowered)\\.com/wishlist/id/(\\w+)",
+  )
     .exec(wishlistUrl);
   if (!match) error(400, "Wrong URL");
 
