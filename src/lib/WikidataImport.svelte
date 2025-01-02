@@ -30,16 +30,16 @@
       SPARQL Query
       <textarea
         bind:value={query}
-        placeholder="# Country Flags
+        placeholder={`# Country Flags
 SELECT ?name ?link ?image
-WHERE &lbrace;
+WHERE {
   ?item wdt:P31 wd:Q3624078 .
   ?item wdt:P41 ?image .
-  ?item rdfs:label ?name filter (lang(?name) = &quot;en&quot;)
+  ?item rdfs:label ?name filter (lang(?name) = "en")
   ?link schema:about ?item .
-  ?link schema:inLanguage &quot;en&quot; .
+  ?link schema:inLanguage "en" .
   ?link schema:isPartOf <https://en.wikipedia.org/> .
-&rbrace;"
+}`}
         required
       ></textarea>
     </label>
