@@ -17,7 +17,7 @@
 <article>
   {@render children?.()}
   {#if image}
-    <img src={image} alt={name} />
+    <img src={image} alt={name} loading="lazy" />
   {/if}
   <div>
     <span>{name}</span>
