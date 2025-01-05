@@ -5,6 +5,7 @@
   import ManualImport from "$lib/ManualImport.svelte";
   import { mergeInsertionSort, type Sorter } from "$lib/mergeInsertionSort";
   import WikidataImport from "$lib/WikidataImport.svelte";
+  import CsvImport from "$lib/CsvImport.svelte";
 
   let items: ItemData[] = $state([]);
   let comparison: [ItemData, ItemData] | undefined = $state();
@@ -60,6 +61,7 @@
     <ManualImport onImport={importItems} />
     <SteamImport onImport={importItems} />
     <YoutubeImport onImport={importItems} />
+    <CsvImport onImport={importItems} />
     <WikidataImport onImport={importItems} />
   </section>
   <section class="items">
