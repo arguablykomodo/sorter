@@ -165,4 +165,15 @@
     background: black;
     opacity: 0.8;
   }
+
+  @media (max-width: 80ch) {
+    main {
+      grid-template-columns: 100vw;
+      grid-template-rows: max-content max-content;
+    }
+
+    dialog[open] {
+      min-width: 100vw;
+    }
+  }
 </style>
