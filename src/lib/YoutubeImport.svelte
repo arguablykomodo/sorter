@@ -19,7 +19,7 @@
 </script>
 
 <details>
-  <summary>Youtube Playlist</summary>
+  <summary>Youtube Playlist Import</summary>
   <form
     onsubmit={(e) => {
       e.preventDefault();

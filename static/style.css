@@ -34,7 +34,8 @@ select {
 }
 
 input,
-textarea {
+textarea,
+select {
   background: var(--primary-bg);
   border: 1px solid var(--tertiary-bg);
   padding: 2px;
@@ -43,6 +44,11 @@ textarea {
 textarea,
 code {
   font-family: "Cascadia Code", "Cascadia Mono", "Fira Code", "Fira Mono", "Noto Mono", monospace;
+}
+
+textarea {
+  height: 15em;
+  resize: vertical;
 }
 
 button,

@@ -4,7 +4,23 @@
 
   const { onImport }: { onImport: (items: ItemData[]) => void } = $props();
 
+  const presets = new Map([
+    [
+      "Country Flags",
+      `SELECT ?name ?link ?image
+WHERE {
+  ?item wdt:P31 wd:Q3624078 .
+  ?item wdt:P41 ?image .
+  ?item rdfs:label ?name filter (lang(?name) = "en")
+  ?link schema:about ?item .
+  ?link schema:inLanguage "en" .
+  ?link schema:isPartOf <https://en.wikipedia.org/> .
+}`,
+    ],
+  ]);
+
   let query: string | undefined = $state();
+  let selectedPreset: string | undefined = $state();
   let promise = $state();
 
   async function fetchData() {
@@ -19,7 +35,7 @@
 </script>
 
 <details>
-  <summary>Wikidata import</summary>
+  <summary>Wikidata Import</summary>
   <form
     onsubmit={(e) => {
       e.preventDefault();
@@ -28,22 +44,32 @@
   >
     <fieldset>
       <label>
-        SPARQL Query
-        <textarea
-          bind:value={query}
-          placeholder={`# Country Flags
-SELECT ?name ?link ?image
-WHERE {
-  ?item wdt:P31 wd:Q3624078 .
-  ?item wdt:P41 ?image .
-  ?item rdfs:label ?name filter (lang(?name) = "en")
-  ?link schema:about ?item .
-  ?link schema:inLanguage "en" .
-  ?link schema:isPartOf <https://en.wikipedia.org/> .
-}`}
-          required
-        ></textarea>
+        Presets
+        <select
+          bind:value={selectedPreset}
+          onchange={() => (query = selectedPreset)}
+        >
+          <option value="" selected></option>
+          {#each presets as [name, value]}
+            <option {value}>{name}</option>
+          {/each}
+        </select>
       </label>
+      <label>
+        SPARQL Query
+        <textarea bind:value={query} placeholder="Pick a preset" required>
+        </textarea>
+      </label>
+      <small>
+        Query should return properties named
+        <code>name</code>,
+        <code>link</code> and
+        <code>image</code>. Read
+        <a href="https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial">
+          Wikidata's SPARQL tutorial
+        </a>
+        for more information.
+      </small>
       <input type="submit" value="Import" />
       {#await promise}
         <small><Throbber />Loading</small>

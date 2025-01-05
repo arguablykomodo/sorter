@@ -32,13 +32,13 @@
       <label>
         File
         <input type="file" name="file" bind:files required />
-        <small>
-          Columns should be named
-          <code>name</code>,
-          <code>link</code> and
-          <code>image</code>.
-        </small>
       </label>
+      <small>
+        Columns should be named
+        <code>name</code>,
+        <code>link</code> and
+        <code>image</code>.
+      </small>
       <input type="submit" value="Import" />
       {#await promise}
         <small><Throbber />Loading</small>
