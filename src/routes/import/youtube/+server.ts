@@ -42,7 +42,6 @@ export const GET: RequestHandler = async (req) => {
   let items = [];
 
   let nextPageToken;
-  let totalResults;
   do {
     let result: PlaylistResponse = await googleFetch(
       "youtube/v3/playlistItems",
@@ -55,7 +54,6 @@ export const GET: RequestHandler = async (req) => {
     );
     if ("error" in result) error(result.error.code, result.error.message);
     nextPageToken = result.nextPageToken;
-    totalResults = result.pageInfo.totalResults;
     const newItems = result.items
       .filter((item) => item.snippet.thumbnails.high) // Filter removed videos
       .map((item) => ({
@@ -64,7 +62,7 @@ export const GET: RequestHandler = async (req) => {
         image: item.snippet.thumbnails.high.url,
       }));
     items.push(...newItems);
-  } while (items.length < totalResults);
+  } while (nextPageToken);
 
   return json(items);
 };
