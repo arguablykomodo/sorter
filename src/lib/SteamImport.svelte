@@ -18,29 +18,31 @@
   }
 </script>
 
-<form
-  onsubmit={(e) => {
-    e.preventDefault();
-    promise = fetchData();
-  }}
->
-  <fieldset>
-    <legend>Steam Wishlist</legend>
-    <label>
-      Wishlist URL
-      <input
-        type="url"
-        name="url"
-        bind:value={wishlistUrl}
-        placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
-        required
-      />
-    </label>
-    <input type="submit" value="Import" />
-    {#await promise}
-      <small><Throbber />Loading</small>
-    {:catch error}
-      <small style:color="var(--error-fg)">{error}</small>
-    {/await}
-  </fieldset>
-</form>
+<details>
+  <summary>Steam Wishlist Import</summary>
+  <form
+    onsubmit={(e) => {
+      e.preventDefault();
+      promise = fetchData();
+    }}
+  >
+    <fieldset>
+      <label>
+        Wishlist URL
+        <input
+          type="url"
+          name="url"
+          bind:value={wishlistUrl}
+          placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
+          required
+        />
+      </label>
+      <input type="submit" value="Import" />
+      {#await promise}
+        <small><Throbber />Loading</small>
+      {:catch error}
+        <small style:color="var(--error-fg)">{error}</small>
+      {/await}
+    </fieldset>
+  </form>
+</details>

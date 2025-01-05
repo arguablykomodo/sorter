@@ -104,7 +104,7 @@
 <style>
   main {
     display: grid;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: 40ch 1fr;
     grid-template-rows: 100vh;
   }
 
@@ -112,7 +112,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
     background: var(--secondary-bg);
     overflow-y: auto;
   }

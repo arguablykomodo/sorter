@@ -18,19 +18,20 @@
   }
 </script>
 
-<form
-  onsubmit={(e) => {
-    e.preventDefault();
-    promise = fetchData();
-  }}
->
-  <fieldset>
-    <legend>Wikidata (advanced)</legend>
-    <label>
-      SPARQL Query
-      <textarea
-        bind:value={query}
-        placeholder={`# Country Flags
+<details>
+  <summary>Wikidata import</summary>
+  <form
+    onsubmit={(e) => {
+      e.preventDefault();
+      promise = fetchData();
+    }}
+  >
+    <fieldset>
+      <label>
+        SPARQL Query
+        <textarea
+          bind:value={query}
+          placeholder={`# Country Flags
 SELECT ?name ?link ?image
 WHERE {
   ?item wdt:P31 wd:Q3624078 .
@@ -40,14 +41,15 @@ WHERE {
   ?link schema:inLanguage "en" .
   ?link schema:isPartOf <https://en.wikipedia.org/> .
 }`}
-        required
-      ></textarea>
-    </label>
-    <input type="submit" value="Import" />
-    {#await promise}
-      <small><Throbber />Loading</small>
-    {:catch error}
-      <small style:color="var(--error-fg)">{error}</small>
-    {/await}
-  </fieldset>
-</form>
+          required
+        ></textarea>
+      </label>
+      <input type="submit" value="Import" />
+      {#await promise}
+        <small><Throbber />Loading</small>
+      {:catch error}
+        <small style:color="var(--error-fg)">{error}</small>
+      {/await}
+    </fieldset>
+  </form>
+</details>

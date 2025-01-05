@@ -65,7 +65,8 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: 0.5ch;
-  border: 1px solid var(--tertiary-bg);
+  border: none;
+  border-top: 1px solid var(--tertiary-bg);
 }
 
 fieldset label {
@@ -74,7 +75,7 @@ fieldset label {
 }
 
 input[type=submit] {
-  margin-top: 2ch;
+  margin-top: 1ch;
 }
 
 progress {
@@ -94,4 +95,14 @@ progress {
 
 ::-webkit-progress-value {
   background: var(--accent-bg);
+}
+
+details {
+  border: 1px solid var(--tertiary-bg);
+}
+
+summary {
+  padding-inline-start: 1ch;
+  background: var(--tertiary-bg);
+  cursor: pointer;
 }
