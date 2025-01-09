@@ -28,7 +28,6 @@
       items = result.value;
       sorted = true;
     } else {
-      console.log("showmodal");
       dialog?.showModal();
       comparison = result.value;
     }
