@@ -6,6 +6,7 @@
   import { mergeInsertionSort, type Sorter } from "$lib/mergeInsertionSort";
   import WikidataImport from "$lib/WikidataImport.svelte";
   import CsvImport from "$lib/CsvImport.svelte";
+  import { stringify } from "csv-stringify/browser/esm/sync";
 
   let items: ItemData[] = $state([]);
   let comparison: [ItemData, ItemData] | undefined = $state();
@@ -52,6 +53,16 @@
   function removeItem(index: number) {
     items.splice(index, 1);
   }
+
+  function csvExport() {
+    const ranked = items.map((item, i) => ({ rank: i + 1, ...item }));
+    const csv = stringify(ranked, {
+      columns: ["rank", "name", "link", "image"],
+      header: true,
+    });
+    const file = new File([csv], "ranked.csv", { type: "text/csv" });
+    window.open(URL.createObjectURL(file));
+  }
 </script>
 
 <main>
@@ -62,6 +73,7 @@
     <YoutubeImport onImport={importItems} />
     <CsvImport onImport={importItems} />
     <WikidataImport onImport={importItems} />
+    <button disabled={!sorted} onclick={csvExport}>Export as CSV</button>
   </section>
   <section class="items">
     {#if sorted}

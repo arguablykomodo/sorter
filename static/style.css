@@ -65,6 +65,12 @@ input[type=submit],
   &:active {
     background: color-mix(in oklab, var(--accent-bg), transparent 90%);
   }
+
+  &:disabled {
+    background: color-mix(in oklab, var(--accent-bg), transparent 80%);
+    border-color: color-mix(in oklab, var(--accent-bg), transparent 90%);
+    color: color-mix(in oklab, var(--accent-fg), transparent 50%)
+  }
 }
 
 fieldset {
