@@ -15,12 +15,18 @@
 
   const sorter = mergeInsertionSort(items, (item) => item);
   let comparison = $state<[ItemData, ItemData]>();
-  let iteration = $state(-1);
-  onCompare(false);
+  let iteration = $state(0);
+  init();
 
-  let dialog: HTMLDialogElement | undefined = $state();
+  let dialog: HTMLDialogElement;
   onMount(() => dialog?.showModal());
   onDestroy(() => dialog?.close());
+
+  function init() {
+    const result = sorter.next();
+    if (result.done) onSorted(result.value);
+    else comparison = result.value;
+  }
 
   function onCompare(greater: boolean) {
     iteration++;
@@ -48,10 +54,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
     border: none;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: max-content 6em 6em max-content;
     gap: 1ch;
-    min-width: 50ch;
+    width: 70ch;
     background: var(--primary-bg);
   }
 
