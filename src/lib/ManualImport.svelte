@@ -15,20 +15,18 @@
       newItem = { name: "" };
     }}
   >
-    <fieldset>
-      <label>
-        Name
-        <input type="text" name="name" bind:value={newItem.name} required />
-      </label>
-      <label>
-        Link (optional)
-        <input type="url" name="link" bind:value={newItem.link} />
-      </label>
-      <label>
-        Image URL (optional)
-        <input type="url" name="image" bind:value={newItem.image} />
-      </label>
-      <input type="submit" value="Add" />
-    </fieldset>
+    <label>
+      Name
+      <input type="text" name="name" bind:value={newItem.name} required />
+    </label>
+    <label>
+      Link (optional)
+      <input type="url" name="link" bind:value={newItem.link} />
+    </label>
+    <label>
+      Image URL (optional)
+      <input type="url" name="image" bind:value={newItem.image} />
+    </label>
+    <input type="submit" value="Add" />
   </form>
 </details>

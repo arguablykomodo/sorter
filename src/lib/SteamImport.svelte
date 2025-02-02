@@ -26,23 +26,21 @@
       promise = fetchData();
     }}
   >
-    <fieldset>
-      <label>
-        Wishlist URL
-        <input
-          type="url"
-          name="url"
-          bind:value={wishlistUrl}
-          placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
-          required
-        />
-      </label>
-      <input type="submit" value="Import" />
-      {#await promise}
-        <small><Throbber />Loading</small>
-      {:catch error}
-        <small style:color="var(--error-fg)">{error}</small>
-      {/await}
-    </fieldset>
+    <label>
+      Wishlist URL
+      <input
+        type="url"
+        name="url"
+        bind:value={wishlistUrl}
+        placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
+        required
+      />
+    </label>
+    <input type="submit" value="Import" />
+    {#await promise}
+      <small><Throbber />Loading</small>
+    {:catch error}
+      <small style:color="var(--error-fg)">{error}</small>
+    {/await}
   </form>
 </details>

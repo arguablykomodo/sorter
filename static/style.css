@@ -23,7 +23,7 @@ body {
   color: var(--primary-fg);
 
   line-height: 1.5;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 input,
@@ -52,7 +52,7 @@ textarea {
 }
 
 button,
-input[type=submit],
+input[type="submit"],
 ::file-selector-button {
   border: 1px solid var(--accent-bg);
   background: color-mix(in oklab, var(--accent-bg), transparent 80%);
@@ -69,25 +69,8 @@ input[type=submit],
   &:disabled {
     background: color-mix(in oklab, var(--accent-bg), transparent 80%);
     border-color: color-mix(in oklab, var(--accent-bg), transparent 90%);
-    color: color-mix(in oklab, var(--accent-fg), transparent 50%)
+    color: color-mix(in oklab, var(--accent-fg), transparent 50%);
   }
-}
-
-fieldset {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5ch;
-  border: none;
-  border-top: 1px solid var(--tertiary-bg);
-}
-
-fieldset label {
-  display: flex;
-  flex-direction: column;
-}
-
-input[type=submit] {
-  margin-top: 1ch;
 }
 
 progress {
@@ -117,4 +100,23 @@ summary {
   padding-inline-start: 1ch;
   background: var(--tertiary-bg);
   cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5ch;
+  border: none;
+  border-top: 1px solid var(--tertiary-bg);
+  padding-block: 0.35em 0.625em;
+  padding-inline: 0.75em;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="submit"] {
+  margin-top: 1ch;
 }

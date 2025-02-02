@@ -42,40 +42,38 @@ WHERE {
       promise = fetchData();
     }}
   >
-    <fieldset>
-      <label>
-        Presets
-        <select
-          bind:value={selectedPreset}
-          onchange={() => (query = selectedPreset)}
-        >
-          <option value="" selected></option>
-          {#each presets as [name, value]}
-            <option {value}>{name}</option>
-          {/each}
-        </select>
-      </label>
-      <label>
-        SPARQL Query
-        <textarea bind:value={query} placeholder="Pick a preset" required>
-        </textarea>
-      </label>
-      <small>
-        Query should return properties named
-        <code>name</code>,
-        <code>link</code> and
-        <code>image</code>. Read
-        <a href="https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial">
-          Wikidata's SPARQL tutorial
-        </a>
-        for more information.
-      </small>
-      <input type="submit" value="Import" />
-      {#await promise}
-        <small><Throbber />Loading</small>
-      {:catch error}
-        <small style:color="var(--error-fg)">{error}</small>
-      {/await}
-    </fieldset>
+    <label>
+      Presets
+      <select
+        bind:value={selectedPreset}
+        onchange={() => (query = selectedPreset)}
+      >
+        <option value="" selected></option>
+        {#each presets as [name, value]}
+          <option {value}>{name}</option>
+        {/each}
+      </select>
+    </label>
+    <label>
+      SPARQL Query
+      <textarea bind:value={query} placeholder="Pick a preset" required>
+      </textarea>
+    </label>
+    <small>
+      Query should return properties named
+      <code>name</code>,
+      <code>link</code> and
+      <code>image</code>. Read
+      <a href="https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial">
+        Wikidata's SPARQL tutorial
+      </a>
+      for more information.
+    </small>
+    <input type="submit" value="Import" />
+    {#await promise}
+      <small><Throbber />Loading</small>
+    {:catch error}
+      <small style:color="var(--error-fg)">{error}</small>
+    {/await}
   </form>
 </details>

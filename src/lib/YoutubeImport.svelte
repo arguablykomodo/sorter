@@ -26,23 +26,21 @@
       promise = fetchData();
     }}
   >
-    <fieldset>
-      <label>
-        Playlist URL
-        <input
-          type="url"
-          name="url"
-          bind:value={playlistUrl}
-          placeholder="https://www.youtube.com/playlist?list=PLlaN88a7y2_plecYoJxvRFTLHVbIVAOoc"
-          required
-        />
-      </label>
-      <input type="submit" value="Import" />
-      {#await promise}
-        <small><Throbber />Loading</small>
-      {:catch error}
-        <small style:color="var(--error-fg)">{error}</small>
-      {/await}
-    </fieldset>
+    <label>
+      Playlist URL
+      <input
+        type="url"
+        name="url"
+        bind:value={playlistUrl}
+        placeholder="https://www.youtube.com/playlist?list=PLlaN88a7y2_plecYoJxvRFTLHVbIVAOoc"
+        required
+      />
+    </label>
+    <input type="submit" value="Import" />
+    {#await promise}
+      <small><Throbber />Loading</small>
+    {:catch error}
+      <small style:color="var(--error-fg)">{error}</small>
+    {/await}
   </form>
 </details>
