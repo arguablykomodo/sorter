@@ -7,6 +7,7 @@
 
   let files: FileList | null | undefined = $state();
   let promise = $state();
+  let loading = $state(false);
 
   async function parseData() {
     const file = files?.item(0);
@@ -25,7 +26,8 @@
   <form
     onsubmit={(e) => {
       e.preventDefault();
-      promise = parseData();
+      loading = true;
+      promise = parseData().finally(() => (loading = false));
     }}
   >
     <label>
@@ -38,7 +40,7 @@
       <code>link</code> and
       <code>image</code>.
     </small>
-    <input type="submit" value="Import" />
+    <input type="submit" value="Import" disabled={loading} />
     {#await promise}
       <small><Throbber />Loading</small>
     {:catch error}

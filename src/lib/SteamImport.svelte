@@ -6,6 +6,7 @@
 
   let wishlistUrl: string | undefined = $state();
   let promise = $state();
+  let loading = $state(false);
 
   async function fetchData() {
     const searchParams = new URLSearchParams({ url: wishlistUrl ?? "" });
@@ -23,7 +24,8 @@
   <form
     onsubmit={(e) => {
       e.preventDefault();
-      promise = fetchData();
+      loading = true;
+      promise = fetchData().finally(() => (loading = false));
     }}
   >
     <label>
@@ -36,7 +38,7 @@
         required
       />
     </label>
-    <input type="submit" value="Import" />
+    <input type="submit" value="Import" disabled={loading} />
     {#await promise}
       <small><Throbber />Loading</small>
     {:catch error}

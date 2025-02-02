@@ -22,6 +22,7 @@ WHERE {
   let query: string | undefined = $state();
   let selectedPreset: string | undefined = $state();
   let promise = $state();
+  let loading = $state(false);
 
   async function fetchData() {
     const searchParams = new URLSearchParams({ query: query ?? "" });
@@ -39,7 +40,8 @@ WHERE {
   <form
     onsubmit={(e) => {
       e.preventDefault();
-      promise = fetchData();
+      loading = true;
+      promise = fetchData().finally(() => (loading = false));
     }}
   >
     <label>
@@ -69,7 +71,7 @@ WHERE {
       </a>
       for more information.
     </small>
-    <input type="submit" value="Import" />
+    <input type="submit" value="Import" disabled={loading} />
     {#await promise}
       <small><Throbber />Loading</small>
     {:catch error}
