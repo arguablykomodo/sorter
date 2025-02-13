@@ -32,7 +32,7 @@
   >
     <label>
       File
-      <input type="file" name="file" bind:files required />
+      <input type="file" bind:files required />
     </label>
     <small>
       Columns should be named

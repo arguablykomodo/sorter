@@ -17,15 +17,15 @@
   >
     <label>
       Name
-      <input type="text" name="name" bind:value={newItem.name} required />
+      <input type="text" bind:value={newItem.name} required />
     </label>
     <label>
       Link (optional)
-      <input type="url" name="link" bind:value={newItem.link} />
+      <input type="url" bind:value={newItem.link} />
     </label>
     <label>
       Image URL (optional)
-      <input type="url" name="image" bind:value={newItem.image} />
+      <input type="url" bind:value={newItem.image} />
     </label>
     <input type="submit" value="Add" />
   </form>

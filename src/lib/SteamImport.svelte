@@ -32,7 +32,6 @@
       Wishlist URL
       <input
         type="url"
-        name="url"
         bind:value={wishlistUrl}
         placeholder="https://steamcommunity.com/wishlist/id/gabelogannewell"
         required

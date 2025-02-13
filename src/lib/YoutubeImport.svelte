@@ -32,7 +32,6 @@
       Playlist URL
       <input
         type="url"
-        name="url"
         bind:value={playlistUrl}
         placeholder="https://www.youtube.com/playlist?list=PLlaN88a7y2_plecYoJxvRFTLHVbIVAOoc"
         required
