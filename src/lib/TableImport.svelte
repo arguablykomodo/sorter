@@ -25,7 +25,7 @@
   }
 </script>
 
-<details open>
+<details>
   <summary>Table Import</summary>
   <form
     onsubmit={(e) => {
