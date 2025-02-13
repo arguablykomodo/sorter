@@ -5,6 +5,7 @@
   import ManualImport from "$lib/ManualImport.svelte";
   import WikidataImport from "$lib/WikidataImport.svelte";
   import CsvImport from "$lib/CsvImport.svelte";
+  import TableImport from "$lib/TableImport.svelte";
   import SortDialog from "$lib/SortDialog.svelte";
   import { stringify } from "csv-stringify/browser/esm/sync";
 
@@ -51,6 +52,7 @@
     <YoutubeImport onImport={importItems} />
     <CsvImport onImport={importItems} />
     <WikidataImport onImport={importItems} />
+    <TableImport onImport={importItems} />
     <button disabled={!sorted} onclick={csvExport}>Export as CSV</button>
   </section>
   <section class="items">
