@@ -29,7 +29,7 @@ export const GET: RequestHandler = async (req) => {
     const rows = findAll(tagName("tr"), table);
     for (const row of rows) {
       const cells = findAll(tagName("td"), row);
-      if (cells.length === 0) continue;
+      if (cells.length <= Math.max(nameCol, linkCol, imgCol) + 1) continue;
       items.push({
         name: textContent(cells[nameCol]).trim(),
         link: linkCol >= 0
