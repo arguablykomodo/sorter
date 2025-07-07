@@ -112,11 +112,25 @@ form {
   padding-inline: 0.75em;
 }
 
-form label {
+form>label {
   display: flex;
   flex-direction: column;
 }
 
-input[type="submit"] {
+form>input[type="submit"] {
   margin-top: 1ch;
+}
+
+dialog[open] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: var(--primary-bg);
+}
+
+::backdrop {
+  background: black;
+  opacity: 0.8;
 }

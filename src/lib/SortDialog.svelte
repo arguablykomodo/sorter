@@ -49,20 +49,9 @@
 
 <style>
   dialog[open] {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
     display: grid;
     grid-template-rows: max-content 6em 6em max-content;
     gap: 1ch;
     width: 70ch;
-    background: var(--primary-bg);
-  }
-
-  ::backdrop {
-    background: black;
-    opacity: 0.8;
   }
 </style>
