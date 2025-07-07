@@ -1,5 +1,5 @@
 import { error, json } from "@sveltejs/kit";
-import { fromURL } from "cheerio";
+import { load } from "cheerio";
 import type { RequestHandler } from "./$types";
 
 export interface Table {
@@ -20,7 +20,9 @@ export const GET: RequestHandler = async (req) => {
   const url = params.get("url");
   if (!url) error(400, "Missing URL");
 
-  const $ = await fromURL(url);
+  const html = await fetch(url).then(r => r.text());
+
+  const $ = load(html);
   const data = $.extract({
     tables: [{
       selector: "table",
